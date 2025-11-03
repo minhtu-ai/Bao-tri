@@ -237,6 +237,11 @@ function App() {
       }));
   }, [setHistory, userRole]);
 
+  const deleteHistoryEntries = useCallback((entryIds: string[]) => {
+    if (userRole !== 'editor') return;
+    setHistory(prev => prev.filter(entry => !entryIds.includes(entry.id)));
+  }, [setHistory, userRole]);
+
   const handleNotificationClick = (ids: { workshopId: string; equipmentId: string; taskId: string }) => {
     setHighlightedItem(ids);
   };
@@ -336,6 +341,7 @@ function App() {
            workshops={workshops}
            onUpdateHistory={updateHistory}
            userRole={userRole}
+           onDeleteHistory={deleteHistoryEntries}
          />
       )}
     </div>
