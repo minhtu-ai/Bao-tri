@@ -1,0 +1,5 @@
+{
+  "name": "Thiết bị - CFC - v.1.0",
+  "description": "Một ứng dụng để theo dõi và thông báo lịch bảo trì, sửa chữa cho các thiết bị Công ty CFC.",
+  "requestFramePermissions": []
+}
