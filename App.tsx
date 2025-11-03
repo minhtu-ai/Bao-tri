@@ -137,7 +137,39 @@ function App() {
   const deleteWorkshop = useCallback((workshopId: string) => {
     if (userRole !== 'editor') return;
     setWorkshops(prev => prev.filter(workshop => workshop.id !== workshopId));
-  }, [setWorkshops, userRole]);
+    setHistory(prev => prev.filter(entry => entry.workshopId !== workshopId));
+  }, [setWorkshops, setHistory, userRole]);
+
+  const deleteEquipment = useCallback((workshopId: string, equipmentId: string) => {
+    if (userRole !== 'editor') return;
+    setWorkshops(prev => prev.map(w => {
+        if (w.id === workshopId) {
+            return { ...w, equipment: w.equipment.filter(e => e.id !== equipmentId) };
+        }
+        return w;
+    }));
+    setHistory(prev => prev.filter(entry => entry.equipmentId !== equipmentId));
+  }, [setWorkshops, setHistory, userRole]);
+
+  const deleteTask = useCallback((workshopId: string, equipmentId: string, taskId: string) => {
+    if (userRole !== 'editor') return;
+    setWorkshops(prev => prev.map(w => {
+        if (w.id === workshopId) {
+            return {
+                ...w,
+                equipment: w.equipment.map(e => {
+                    if (e.id === equipmentId) {
+                        return { ...e, tasks: e.tasks.filter(t => t.id !== taskId) };
+                    }
+                    return e;
+                })
+            };
+        }
+        return w;
+    }));
+    setHistory(prev => prev.filter(entry => entry.taskId !== taskId));
+  }, [setWorkshops, setHistory, userRole]);
+
 
   const completeMaintenance = useCallback((workshopId: string, equipmentId: string, taskId: string, completionDate: string, notes?: string) => {
     if (userRole !== 'editor') return;
@@ -280,6 +312,8 @@ function App() {
                     highlightedItem={highlightedItem}
                     onHighlightHandled={() => setHighlightedItem(null)}
                     userRole={userRole}
+                    onDeleteEquipment={deleteEquipment}
+                    onDeleteTask={deleteTask}
                 />
                 ))}
             </div>
