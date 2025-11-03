@@ -11,7 +11,7 @@ import { PlusIcon, BookOpenIcon, ArrowRightOnRectangleIcon } from './components/
 
 // --- Start of Auth Logic ---
 const EDITOR_EMAILS: string[] = [
-  'minhtu104000@gmail.com', 'editor2@cfc.com', 'editor3@cfc.com', 'editor4@cfc.com', 'editor5@cfc.com',
+  'minhtu104000@gmail.com', 'xnpbhc.cfc@gmail.com', 'editor2@cfc.com', 'editor3@cfc.com', 'editor4@cfc.com', 'editor5@cfc.com',
   'editor6@cfc.com', 'editor7@cfc.com', 'editor8@cfc.com', 'editor9@cfc.com', 'editor10@cfc.com',
 ].map(email => email.toLowerCase());
 
